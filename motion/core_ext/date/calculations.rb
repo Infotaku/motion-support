@@ -1,5 +1,3 @@
-motion_require "../date_and_time/calculations"
-
 class Date
   include DateAndTime::Calculations
 
@@ -79,7 +77,7 @@ class Date
   end
   alias_method :plus_without_duration, :+
   alias_method :+, :plus_with_duration
-  
+
   def minus_with_duration(other) #:nodoc:
     if MotionSupport::Duration === other
       plus_with_duration(-other)

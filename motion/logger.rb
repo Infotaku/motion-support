@@ -2,7 +2,7 @@ module Kernel
   def log(*args)
     MotionSupport.logger.log(*args)
   end
-  
+
   def l(*args)
     MotionSupport.logger.log(args.map { |a| a.inspect })
   end
@@ -19,7 +19,7 @@ module MotionSupport
       puts args
     end
   end
-  
+
   class NetworkLogger
     def initialize(host = "localhost", port = 2000)
       readStream = Pointer.new(:object)
@@ -30,7 +30,7 @@ module MotionSupport
       @output_stream.scheduleInRunLoop(NSRunLoop.currentRunLoop, forMode:NSDefaultRunLoopMode)
       @output_stream.open
     end
-    
+
     def log(*args)
       args.each do |string|
         data = NSData.alloc.initWithData("#{string}\n".dataUsingEncoding(NSASCIIStringEncoding))
@@ -38,9 +38,9 @@ module MotionSupport
       end
     end
   end
-  
+
   mattr_writer :logger
-  
+
   def self.logger
     @logger ||= StdoutLogger.new
   end

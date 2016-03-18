@@ -1,5 +1,3 @@
-motion_require 'core_ext/hash/keys'
-
 module MotionSupport
   # Implements a hash where keys <tt>:foo</tt> and <tt>"foo"</tt> are considered
   # to be the same.
@@ -221,8 +219,8 @@ module MotionSupport
     def deep_stringify_keys!; self end
     def stringify_keys; dup end
     def deep_stringify_keys; dup end
-    undef :symbolize_keys!
-    undef :deep_symbolize_keys!
+    undef :symbolize_keys! if method_defined? :symbolize_keys!
+    undef :deep_symbolize_keys! if method_defined? :deep_symbolize_keys!
     def symbolize_keys; to_hash.symbolize_keys end
     def deep_symbolize_keys; to_hash.deep_symbolize_keys end
     def to_options!; self end

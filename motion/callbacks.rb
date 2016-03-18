@@ -1,5 +1,3 @@
-motion_require 'concern'
-
 module MotionSupport
   # Callbacks are code hooks that are run at key points in an object's lifecycle.
   # The typical use case is to have a base class define a set of callbacks
@@ -144,7 +142,7 @@ module MotionSupport
           lambda do |obj, value, halted|
             if !halted && @compiled_options.call(obj)
               result = @filter.call(obj)
-              
+
               halted = chain.config[:terminator].call(result)
               if halted
                 obj.halted_callback_hook(@raw_filter.inspect)
@@ -259,11 +257,11 @@ module MotionSupport
             value = !halted && (block.call if block)
             [value, halted]
           end
-          
+
           reverse_each do |callback|
             callbacks = callback.apply(callbacks)
           end
-          
+
           value, halted = *(callbacks.call(obj, value, halted))
 
           value
